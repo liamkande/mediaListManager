@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Media List Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Media List Manager is a web application that allows you to manage a list of media content, such as movies, TV shows, and games. You can create, update, and delete entries in the list, as well as filter the list based on title and type.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- View a list of media content entries
+- Add new media content to the list
+- Update existing media content
+- Delete media content entries
+- Filter the list by title and type
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React: A JavaScript library for building user interfaces
+- TypeScript: A typed superset of JavaScript that compiles to plain JavaScript
+- HTML: The standard markup language for creating web pages
+- CSS: A style sheet language used for describing the presentation of a document written in HTML
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To get started with the Media List Manager, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository: `git clone hhttps://github.com/liamkande/mediaListManager.git`
+2. Navigate to the project directory: `cd mediaListManager`
+3. Install the dependencies: `npm install`
+4. Start the json server run `json-server --watch db.json` 
+5. Start the application: `npm start`
+5. Open your web browser and visit: `http://localhost:3001`
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Upon launching the application, you will see a form to add a new media content entry.
+2. Fill in the required fields (title, type, genre, release year, and rating) and click the "Create" button to add the entry to the list.
+3. The list of media content entries will be displayed below the form.
+4. To update an existing entry, click the "Edit" button next to the desired entry. The form will be populated with the entry's details, and you can modify them.
+5. Click the "Update" button to save the changes.
+6. To delete an entry, click the "Delete" button next to the desired entry. The entry will be removed from the list.
+7. You can filter the list by title and type using the respective input fields at the top of the page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contributing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Contributions are welcome! If you find a bug or have a feature request, please open an issue on the GitHub repository. If you'd like to contribute code, feel free to open a pull request with your changes.
 
-### `npm run eject`
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project is licensed under the [MIT License](LICENSE).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This project was developed as a learning exercise and is not affiliated with any existing media management platform.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
