@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect } from "react"
 import CreateMedia from "./CreateMedia"
 import MediaLists from "./MediaList"
 import "./App.css"
@@ -14,6 +14,7 @@ const App: React.FC = () => {
     rating: 0,
   })
   const [alldata, setAllData] = useState<any[]>([])
+  const [filteredData, setFilteredData] = useState<any[]>([])
 
   const getLists = async () => {
     setIsLoading(true)
@@ -27,21 +28,19 @@ const App: React.FC = () => {
     }
   }
 
+  const newFilteredData = alldata
+    .filter((data) =>
+      data.title.toLowerCase().includes(singledata.title.toLowerCase())
+    )
+    .filter((data) => singledata.type === "" || data.type === singledata.type)
+
   useEffect(() => {
     getLists()
   }, [])
 
-  const filteredData = useMemo(
-    () =>
-      alldata
-        .filter((data) =>
-          data.title.toLowerCase().includes(singledata.title.toLowerCase())
-        )
-        .filter(
-          (data) => singledata.type === "" || data.type === singledata.type
-        ),
-    [alldata, singledata.title, singledata.type]
-  )
+  useEffect(() => {
+    setFilteredData(newFilteredData)
+  }, [alldata])
 
   const handleChange = (
     e:
@@ -49,6 +48,7 @@ const App: React.FC = () => {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = e.target
+   // setFilteredData(newFilteredData)
     setSingledata((prevState) => {
       if (name === "title") {
         return { ...prevState, title: value }
@@ -113,6 +113,7 @@ const App: React.FC = () => {
         releaseYear: result.releaseYear,
         rating: result.rating,
       })
+   
     } catch (error) {
       console.log(error)
     }
@@ -168,6 +169,13 @@ const App: React.FC = () => {
       ...prevState,
       type: value,
     }))
+    setFilteredData(
+      alldata
+        .filter((data) =>
+          data.title.toLowerCase().includes(singledata.title.toLowerCase())
+        )
+        .filter((data) => value === "" || data.type === value)
+    )
   }
 
   const handleSearchChange = (
@@ -176,10 +184,9 @@ const App: React.FC = () => {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = e.target
-    setSingledata((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
+    const searchFieldString = e.target.value
+    setFilteredData(newFilteredData)
+ 
   }
 
   return (
