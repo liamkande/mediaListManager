@@ -10,7 +10,7 @@ interface SingleData {
 
 interface CreateListProps {
   singledata: SingleData
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
   createList: () => void
 }
 

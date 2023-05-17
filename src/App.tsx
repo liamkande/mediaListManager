@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import CreateMedia from "./CreateMedia"
 import MediaLists from "./MediaList"
 import "./App.css"
@@ -14,7 +14,6 @@ const App: React.FC = () => {
     rating: 0,
   })
   const [alldata, setAllData] = useState<any[]>([])
-  const [filteredData, setFilteredData] = useState<any[]>([])
 
   const getLists = async () => {
     setIsLoading(true)
@@ -28,19 +27,21 @@ const App: React.FC = () => {
     }
   }
 
-  const newFilteredData = alldata
-    .filter((data) =>
-      data.title.toLowerCase().includes(singledata.title.toLowerCase())
-    )
-    .filter((data) => singledata.type === "" || data.type === singledata.type)
-
   useEffect(() => {
     getLists()
   }, [])
 
-  useEffect(() => {
-    setFilteredData(newFilteredData)
-  }, [alldata])
+  const filteredData = useMemo(
+    () =>
+      alldata
+        .filter((data) =>
+          data.title.toLowerCase().includes(singledata.title.toLowerCase())
+        )
+        .filter(
+          (data) => singledata.type === "" || data.type === singledata.type
+        ),
+    [alldata, singledata.title, singledata.type]
+  )
 
   const handleChange = (
     e:
@@ -48,7 +49,6 @@ const App: React.FC = () => {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = e.target
-    setFilteredData(newFilteredData)
     setSingledata((prevState) => {
       if (name === "title") {
         return { ...prevState, title: value }
@@ -64,7 +64,7 @@ const App: React.FC = () => {
       }
       if (name === "rating") {
         const ratingValue = parseInt(value, 10)
-        const ratingInRange = Math.min(Math.max(ratingValue, 0), 10)
+        const ratingInRange = Math.min(Math.max(ratingValue, 1), 10)
         return { ...prevState, rating: ratingInRange }
       }
       return prevState
@@ -87,6 +87,7 @@ const App: React.FC = () => {
         releaseYear: 0,
         rating: 0,
       })
+      getLists()
     } catch (error) {
       console.log(error)
     }
@@ -167,13 +168,18 @@ const App: React.FC = () => {
       ...prevState,
       type: value,
     }))
-    setFilteredData(
-      alldata
-        .filter((data) =>
-          data.title.toLowerCase().includes(singledata.title.toLowerCase())
-        )
-        .filter((data) => value === "" || data.type === value)
-    )
+  }
+
+  const handleSearchChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
+    setSingledata((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
 
   return (
@@ -195,7 +201,7 @@ const App: React.FC = () => {
           placeholder="Search by title"
           name="title"
           value={singledata.title}
-          onChange={handleChange}
+          onChange={handleSearchChange}
         />
         <select name="type" value={singledata.type} onChange={handleTypeChange}>
           <option value="">All Types</option>
