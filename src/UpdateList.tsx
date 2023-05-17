@@ -1,24 +1,5 @@
 import React from "react"
-
-interface SingleData {
-  title: string
-  type: string
-  genre: string
-  releaseYear: number
-  rating: number
-}
-
-interface UpdateListProps {
-  elementId: number
-  singledata: SingleData
-  getList: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  updateList: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    id: number,
-    singledata: SingleData
-  ) => void
-}
+import { UpdateListProps } from "./types/MediaContent"
 
 const UpdateList: React.FC<UpdateListProps> = ({
   elementId,

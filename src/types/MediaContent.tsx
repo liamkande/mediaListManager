@@ -46,3 +46,15 @@ export enum MediaType {
     getList: (e: any, id: number) => void;
     deleteList: (e: any, id: number) => void;
   }
+
+  export interface UpdateListProps {
+    elementId: number
+    singledata: SingleData
+    getList: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    updateList: (
+      e: React.MouseEvent<HTMLButtonElement>,
+      id: number,
+      singledata: SingleData
+    ) => void
+  }
